@@ -33,6 +33,8 @@ public class SecurityConfig {
         // 로그인 페이지 URL 설정
         http.formLogin(formLogin -> formLogin
                 .loginPage("/loginForm")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/")
         );
 
         return http.build();
