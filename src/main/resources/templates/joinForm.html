@@ -2,16 +2,16 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>로그인 페이지</title>
+    <title>회원가입 페이지</title>
 </head>
 <body>
-<h1>로그인 페이지</h1>
+<h1>회원가입 페이지</h1>
 <hr/>
-<form>
+<form action="/join" method="POST">
     <input name="username" placeholder="username" type="text"/><br/>
     <input name="password" placeholder="password" type="password"/><br/>
-    <button>로그인</button>
+    <input name="email" placeholder="email" type="email"/><br/>
+    <button>회원가입</button>
 </form>
-<a href="/joinForm">회원가입을 아직 하지 않으셨나요?</a>
 </body>
 </html>

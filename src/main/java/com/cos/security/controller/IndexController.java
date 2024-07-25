@@ -27,18 +27,18 @@ public class IndexController {
         return "manager";
     }
 
-    @GetMapping("/login")
-    public String login() {
+    @GetMapping("/loginForm")
+    public String loginForm() {
         return "loginForm";
+    }
+
+    @GetMapping("/joinForm")
+    public String joinForm() {
+        return "joinForm";
     }
 
     @GetMapping("/join")
     public @ResponseBody String join() {
         return "join";
-    }
-
-    @GetMapping("/joinProc")
-    public @ResponseBody String joinProc() {
-        return "회원가입 완료됨";
     }
 }

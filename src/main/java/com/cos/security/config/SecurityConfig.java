@@ -26,7 +26,7 @@ public class SecurityConfig {
 
         // 로그인 페이지 URL 설정
         http.formLogin(formLogin -> formLogin
-                .loginPage("/login")
+                .loginPage("/loginForm")
         );
 
         return http.build();
