@@ -1,11 +1,21 @@
 package com.cos.security.controller;
 
+import com.cos.security.entity.User;
+import com.cos.security.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequiredArgsConstructor
 public class IndexController {
+
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping
     public String index() {
@@ -37,8 +47,12 @@ public class IndexController {
         return "joinForm";
     }
 
-    @GetMapping("/join")
-    public @ResponseBody String join() {
-        return "join";
+    @PostMapping("/join")
+    public String join(@ModelAttribute User user) {
+        String encPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setRole("ROLE_USER");
+        user.setPassword(encPassword);
+        userRepository.save(user);
+        return "redirect:/loginForm";
     }
 }
