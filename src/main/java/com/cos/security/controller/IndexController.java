@@ -3,6 +3,8 @@ package com.cos.security.controller;
 import com.cos.security.entity.User;
 import com.cos.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,5 +56,17 @@ public class IndexController {
         user.setPassword(encPassword);
         userRepository.save(user);
         return "redirect:/loginForm";
+    }
+
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/info")
+    public @ResponseBody String info() {
+        return "개인정보";
+    }
+
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
+    @GetMapping("/data")
+    public @ResponseBody String data() {
+        return "데이터정보";
     }
 }
